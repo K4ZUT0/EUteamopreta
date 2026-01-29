@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Você ❤️</title>
+
+<style>
+/* 🌌 Fundo azul */
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: white;
+    background: linear-gradient(180deg, #0a3d91, #0d6efd);
+    overflow-x: hidden;
+}
+
+/* ❤️ Corações */
+.heart {
+    position: fixed;
+    top: -10px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+/* 📦 Conteúdo */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 24px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* 🎵 Player estilizado */
+.music-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+#playBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.9);
+    color: #0a3d91;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#playBtn:hover {
+    transform: scale(1.05);
+    background: white;
+}
+
+.music-player span {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+/* ✍ Texto */
+.texto {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    white-space: pre-line;
+}
+
+/* 🖼️ Foto / Vídeos */
+.slideshow {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    background: rgba(255,255,255,0.15);
+    padding: 10px;
+    border-radius: 18px;
+}
+
+.slideshow img,
+.slideshow video {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    display: none;
+}
+
+.slideshow .active {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 🎵 Música -->
+    <div class="music-player">
+        <button id="playBtn">▶</button>
+        <span>Toque para ouvir</span>
+    </div>
+
+    <audio id="music">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ✍ Texto -->
+    <div class="texto">
+Feliz aniversário. Que seu dia seja bom.
+Desculpa por não estar aí com você.
+Queria dar essas flores pessoalmente.
+Tô com muita saudade.
+
+Felizmente ou infelizmente, eu ainda te amo muito.
+Não consigo deixar esse dia passar em branco.
+Acredita que eu me arrependo de ter vindo embora,
+mas tinha que ser feito.
+
+Quem sabe algum dia a gente se encontra de novo.
+
+Independentemente de tudo, desejo de verdade que você seja feliz.
+Você sempre vai ter um lugar importante no meu coração.
+
+Feliz aniversário, minha princesa.
+EU te amo.
+    </div>
+
+    <!-- 🖼️ Foto + 🎬 Vídeos -->
+    <div class="slideshow">
+        <img src="foto1.jpg" class="active">
+        <video src="video1.mp4" controls></video>
+        <video src="video2.mp4" controls></video>
+        <video src="video3.mp4" controls></video>
+    </div>
+
+</div>
+
+<!-- 🎵 Play / Pause -->
+<script>
+const music = document.getElementById('music');
+const playBtn = document.getElementById('playBtn');
+
+playBtn.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
+        playBtn.textContent = '⏸';
+    } else {
+        music.pause();
+        playBtn.textContent = '▶';
+    }
+});
+</script>
+
+<!-- 🔄 Slideshow -->
+<script>
+const slides = document.querySelectorAll('.slideshow img, .slideshow video');
+let current = 0;
+
+setInterval(() => {
+    slides[current].classList.remove('active');
+    if (slides[current].tagName === 'VIDEO') {
+        slides[current].pause();
+        slides[current].currentTime = 0;
+    }
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+}, 6000);
+</script>
+
+<!-- ❤️ Corações -->
+<script>
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "🤍";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    heart.style.fontSize = (12 + Math.random() * 22) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+}
+setInterval(createHeart, 350);
+</script>
+
+</body>
+</html>
