@@ -20,7 +20,6 @@ body {
 .heart {
     position: fixed;
     top: -10px;
-    color: rgba(255,255,255,0.9);
     animation: fall linear infinite;
     pointer-events: none;
 }
@@ -69,25 +68,30 @@ body {
 .texto {
     font-size: 18px;
     line-height: 1.7;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
     white-space: pre-line;
 }
 
-/* Galeria de fotos */
-.galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    margin-bottom: 40px;
+/* Slideshow */
+.slideshow {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto 40px;
+    background: rgba(255,255,255,0.15);
+    padding: 10px;
+    border-radius: 18px;
 }
 
-.galeria img {
+.slideshow img {
     width: 100%;
     height: auto;
     object-fit: contain;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.15);
-    padding: 6px;
+    border-radius: 14px;
+    display: none;
+}
+
+.slideshow img.active {
+    display: block;
 }
 
 /* Vídeos */
@@ -142,9 +146,9 @@ Feliz aniversário, minha princesa.
 EU te amo.
     </div>
 
-    <!-- 6 IMAGENS -->
-    <div class="galeria">
-        <img src="foto1.jpg">
+    <!-- 6 IMAGENS EM SLIDE -->
+    <div class="slideshow">
+        <img src="foto1.jpg" class="active">
         <img src="foto2.jpg">
         <img src="foto3.jpg">
         <img src="foto4.jpg">
@@ -175,6 +179,18 @@ playBtn.onclick = () => {
         playBtn.textContent = '▶';
     }
 };
+</script>
+
+<!-- Slideshow JS -->
+<script>
+const slides = document.querySelectorAll('.slideshow img');
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+}, 4000);
 </script>
 
 <!-- Corações -->
